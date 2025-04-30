@@ -118,9 +118,19 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(jLabel1, gridBagConstraints);
 
+        name.setForeground(new java.awt.Color(153, 153, 153));
+        name.setText("Enter full name");
         name.setMaximumSize(new java.awt.Dimension(400, 22));
         name.setMinimumSize(new java.awt.Dimension(400, 22));
         name.setPreferredSize(new java.awt.Dimension(400, 22));
+        name.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nameFocusLost(evt);
+            }
+        });
         name.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 nameKeyReleased(evt);
@@ -192,9 +202,20 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(24, 12, 12, 12);
         getContentPane().add(jLabel5, gridBagConstraints);
 
+        nif.setEditable(false);
+        nif.setForeground(new java.awt.Color(153, 153, 153));
+        nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
         nif.setMaximumSize(new java.awt.Dimension(400, 22));
         nif.setMinimumSize(new java.awt.Dimension(400, 22));
         nif.setPreferredSize(new java.awt.Dimension(400, 22));
+        nif.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                nifFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                nifFocusLost(evt);
+            }
+        });
         nif.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 nifKeyPressed(evt);
@@ -265,8 +286,10 @@ public class Insert extends javax.swing.JDialog {
 
     private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
         nif.setEditable(true);
-        nif.setText("");
-        name.setText("");
+        nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
+        nif.setForeground(new java.awt.Color(153, 153, 153));
+        name.setText("Enter full name");
+        name.setForeground(new java.awt.Color(153, 153, 153));
         photo.setIcon(null);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
@@ -323,6 +346,35 @@ public class Insert extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_nifKeyPressed
 
+    private void nifFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nifFocusGained
+        if(nif.getText().equals("Enter NIF number, letter is calculated (e.g., 12345678)")){
+            nif.setEditable(true);
+            nif.setText("");
+            nif.setForeground(new java.awt.Color(0,0,0));
+        }
+    }//GEN-LAST:event_nifFocusGained
+
+    private void nifFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nifFocusLost
+        if(nif.getText().isEmpty()){
+            nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
+            nif.setEditable(false);
+            nif.setForeground(new java.awt.Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_nifFocusLost
+
+    private void nameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusGained
+        if(name.getText().equals("Enter full name")){
+            name.setText("");
+            name.setForeground(new java.awt.Color(0, 0, 0));
+        }
+    }//GEN-LAST:event_nameFocusGained
+
+    private void nameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusLost
+        if(name.getText().isEmpty()){
+            name.setText("Enter full name");
+            name.setForeground(new java.awt.Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_nameFocusLost
     private void insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_insertActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_insertActionPerformed
