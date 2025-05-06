@@ -20,6 +20,7 @@ public class Person implements Serializable{
     @Id 
     private String nif;
     private String name;
+    private String email;
     private Date dateOfBirth;
     @Transient
     private ImageIcon photo;
@@ -64,6 +65,14 @@ public class Person implements Serializable{
         this.photo = photo;
     }
 
+    public Person(String name, String nif, String email, Date dateOfBirth, ImageIcon photo) {
+        this.name = name;      
+        this.nif = nif;
+        this.email = email;
+        this.dateOfBirth = dateOfBirth;
+        this.photo = photo;
+    }
+    
     //Getters and Setters
     public String getName() {
         return name;
@@ -71,6 +80,14 @@ public class Person implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNif() {
