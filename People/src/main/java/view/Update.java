@@ -47,6 +47,10 @@ public class Update extends javax.swing.JDialog {
         return name;
     }
 
+    public JTextField getEmail(){
+        return email;
+    }
+    
     public JDatePicker getDateOfBirth() {
         return dateOfBirth;
     }
@@ -85,7 +89,7 @@ public class Update extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         read = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update - People v1.1.0");
@@ -282,7 +286,8 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(jLabel4, gridBagConstraints);
 
-        jTextField1.setBackground(new java.awt.Color(35, 35, 35));
+        email.setBackground(new java.awt.Color(35, 35, 35));
+        email.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -290,7 +295,7 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
-        getContentPane().add(jTextField1, gridBagConstraints);
+        getContentPane().add(email, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -325,9 +330,11 @@ public class Update extends javax.swing.JDialog {
         nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
         nif.setForeground(new java.awt.Color(153, 153, 153));
         name.setText("");
+        email.setText("");
         dateOfBirth.getModel().setValue(null);
         photo.setIcon(null); 
         name.setEnabled(false);
+        email.setEnabled(false);
         photo.setEnabled(false);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
@@ -390,12 +397,12 @@ public class Update extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
+    private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField name;
     private javax.swing.JTextField nif;
     private javax.swing.JLabel photo;

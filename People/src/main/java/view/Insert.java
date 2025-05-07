@@ -320,6 +320,7 @@ public class Insert extends javax.swing.JDialog {
         nif.setForeground(new java.awt.Color(153, 153, 153));
         name.setText("Enter full name");
         name.setForeground(new java.awt.Color(153, 153, 153));
+        email.setText("");
         photo.setIcon(null);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
