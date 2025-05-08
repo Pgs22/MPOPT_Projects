@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import org.jdatepicker.DateModel;
 import org.jdatepicker.JDatePicker;
+import utils.DataValidation;
 
 /**
  * Interface used to updated a person. It is mandatory to enter the NIF.
@@ -286,8 +287,15 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(jLabel4, gridBagConstraints);
 
-        email.setBackground(new java.awt.Color(35, 35, 35));
         email.setEnabled(false);
+        email.setMaximumSize(new java.awt.Dimension(400, 22));
+        email.setMinimumSize(new java.awt.Dimension(400, 22));
+        email.setPreferredSize(new java.awt.Dimension(400, 22));
+        email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -390,6 +398,14 @@ public class Update extends javax.swing.JDialog {
             nif.setForeground(new java.awt.Color(153, 153, 153));
         }
     }//GEN-LAST:event_nifFocusLost
+
+    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
+        if(!email.getText().isEmpty()){
+            if(!DataValidation.isValidEmail(email.getText())){
+                JOptionPane.showMessageDialog(this, "Invalid email format.", this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_emailFocusLost
 
     /**
      * @param args the command line arguments

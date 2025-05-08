@@ -191,7 +191,7 @@ public class ControllerImplementation implements IController, ActionListener {
                 stmt.executeUpdate("create table if not exists " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE() + "("
                         + "nif varchar(9) primary key not null, "
                         + "name varchar(50), "
-                        + "email varchar(150)"
+                        + "email varchar(150), "
                         + "dateOfBirth DATE, "
                         + "photo varchar(200) );");
                 stmt.close();
