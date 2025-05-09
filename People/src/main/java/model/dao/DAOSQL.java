@@ -37,6 +37,9 @@ public class DAOSQL implements IDAO {
     private final String SQL_UPDATE = "UPDATE " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE() + " SET name = ?, dateOfBirth = ?, photo = ? WHERE (nif = ?);";
     private final String SQL_DELETE = "DELETE FROM " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE() + " WHERE (nif = ";
     private final String SQL_DELETE_ALL = "TRUNCATE " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE();
+    
+    //FIX #9  
+    private final String SQL_COUNT_NIF = "SELECT COUNT(nif) FROM " + Routes.DB.getDbServerDB() + "." + Routes.DB.getDbServerTABLE() + ";";
 
     public Connection connect() throws SQLException {
         Connection conn;
@@ -102,6 +105,33 @@ public class DAOSQL implements IDAO {
         disconnect(conn);
         return people;
     }
+    
+    //FIX#9
+    
+    @Override
+   public int count() throws SQLException {
+    int count = 0;
+    Connection conn = null;
+    Statement instruction = null;
+    ResultSet rs = null;
+
+    try {
+        conn = connect();  
+        instruction = conn.createStatement();
+        rs = instruction.executeQuery(SQL_COUNT_NIF);
+
+        if (rs.next()) {
+            count = rs.getInt(1);
+        }
+    } finally {
+        if (rs != null) rs.close();
+        if (instruction != null) instruction.close();
+        if (conn != null) disconnect(conn);
+    }
+
+    return count;
+}
+
 
     @Override
     public void delete(Person p) throws SQLException {

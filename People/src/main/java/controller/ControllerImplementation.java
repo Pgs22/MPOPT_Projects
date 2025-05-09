@@ -67,6 +67,10 @@ public class ControllerImplementation implements IController, ActionListener {
     private Update update;
     private ReadAll readAll;
 
+    // FIX #9
+    private ReadAll count;
+
+
     /**
      * This constructor allows the controller to know which data storage option
      * the user has chosen.Schedule an event to deploy when the user has made
@@ -120,6 +124,9 @@ public class ControllerImplementation implements IController, ActionListener {
             handleReadAll();
         } else if (e.getSource() == menu.getDeleteAll()) {
             handleDeleteAll();
+        }
+          else if (e.getSource() == menu.Count()) {
+            handleGetCount();
         }
     }
 
@@ -380,6 +387,39 @@ public class ControllerImplementation implements IController, ActionListener {
             deleteAll();
         }
     }
+public void handleGetCount() {
+    // Obtener el número de personas
+    int count = count();
+
+    // Mostrar el número de personas
+    JOptionPane.showMessageDialog(menu, "Número total de personas registradas: " + count, "Contar Personas", JOptionPane.INFORMATION_MESSAGE);
+
+    // Luego, si quieres mostrar todos los detalles:
+    ArrayList<Person> s = readAll();
+    if (s.isEmpty()) {
+        JOptionPane.showMessageDialog(menu, "There are not people registered yet.", "Read All - People v1.1.0", JOptionPane.WARNING_MESSAGE);
+    } else {
+        readAll = new ReadAll(menu, true);
+        DefaultTableModel model = (DefaultTableModel) readAll.getTable().getModel();
+        for (int i = 0; i < s.size(); i++) {
+            model.addRow(new Object[i]);
+            model.setValueAt(s.get(i).getNif(), i, 0);
+            model.setValueAt(s.get(i).getName(), i, 1);
+            if (s.get(i).getDateOfBirth() != null) {
+                model.setValueAt(s.get(i).getDateOfBirth().toString(), i, 2);
+            } else {
+                model.setValueAt("", i, 2);
+            }
+            if (s.get(i).getPhoto() != null) {
+                model.setValueAt("yes", i, 3);
+            } else {
+                model.setValueAt("no", i, 3);
+            }
+        }
+        readAll.setVisible(true);
+    }
+}
+
     
     /**
      * This function inserts the Person object with the requested NIF, if it
@@ -525,6 +565,19 @@ public void delete(Person p) {
         }
         return people;
     }
+    
+    //FIX #9
+    public int count() {
+        int count = 0;
+        try {
+            count = dao.count(); // Método en el DAO que hace la consulta SQL
+        } catch (Exception ex) {
+        JOptionPane.showMessageDialog(readAll, ex.getMessage() + " Closing application.", readAll.getTitle(), JOptionPane.ERROR_MESSAGE);
+        System.exit(0);
+        }
+        return count;
+}
+
 
     /**
      * This function deletes all the people registered. If there is any access
