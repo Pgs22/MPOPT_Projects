@@ -36,16 +36,17 @@ public class Person implements Serializable{
     
     Actualmente, el modelo "Persona" carece de un campo de número de teléfono y validación. Para mejorar el modelo, deberíamos:
 
-Añadir un nuevo campo phoneNumber al modelo "Persona".
+ok    Añadir un nuevo campo phoneNumber al modelo "Persona".
 Implementar la validación con expresiones regulares para garantizar que el número de teléfono tenga el formato correcto.
-Actualizar la interfaz de usuario para gestionar la entrada y validación del número de teléfono al añadir o actualizar una persona.
-Contexto adicional.
+ok    Actualizar la interfaz de usuario para gestionar la entrada y validación del número de teléfono al añadir o actualizar una persona.
+ok    Contexto adicional.
 
-Campo PhoneNumber:
-Añadir un atributo phoneNumber a la clase "Persona" con los métodos getter y setter necesarios.
+ok    Campo PhoneNumber:
+ok    Añadir un atributo phoneNumber a la clase "Persona" con los métodos getter y setter necesarios.
 
 Validación con expresiones regulares:
-Usar un patrón de expresiones regulares para validar el formato del número de teléfono. Por ejemplo, para un formato de número de teléfono internacional estándar:
+Usar un patrón de expresiones regulares para validar el formato del número de teléfono.
+Por ejemplo, para un formato de número de teléfono internacional estándar:
 String phoneRegex = "^+?[0-9]{1,4}?[-.\s]?(?\d{1,3})?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"; Cambios en el menú o la app:
 Actualice el formulario o el panel de entrada de la app o el menú para incluir el campo "Número de teléfono".
 
@@ -148,7 +149,22 @@ Si el número de teléfono no supera la validación, impida que el usuario guard
     public void setPhotoOnlyJPA(byte[] photoOnlyJPA) {
         this.photoOnlyJPA = photoOnlyJPA;
     }
-        
+
+    /**
+     * @return the phoneNumber
+     */
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    /**
+     * @param phoneNumber the phoneNumber to set
+     */
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }    
+    
+    
     /**
      * Function used to compare two Personas. There cannot be two or more people
      * with the same ID. Actually it isn't used in this project.
@@ -193,5 +209,6 @@ Si el número de teléfono no supera la validación, impida que el usuario guard
         return "Person {" + "Name = " + name + ", NIF = " + nif
                 + ", DateOfBirth = " + dateOfBirth + ", Photo = " + (photo!=null) + "}";
     }
+
 
 }
