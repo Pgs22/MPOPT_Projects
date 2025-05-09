@@ -429,8 +429,12 @@ public class Insert extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_nameFocusLost
 
+    private void dateOfBirthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateOfBirthActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dateOfBirthActionPerformed
 
-    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
+
+    private void emailFocusLost(java.awt.event.FocusEvent evt) {                                
         if(email.getText().isEmpty()){
             email.setText("Enter your email");
             email.setForeground(new java.awt.Color(153, 153, 153));
@@ -442,7 +446,7 @@ public class Insert extends javax.swing.JDialog {
         }
     }
 
-    private void emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusGained
+    private void emailFocusGained(java.awt.event.FocusEvent evt) {                                  
         if(email.getText().equals("Enter your email")){
             email.setText("");
             email.setForeground(new java.awt.Color(0, 0, 0));
