@@ -38,9 +38,6 @@ public class Insert extends javax.swing.JDialog {
         botonCalendario.setText("Select a date");
         Dimension preferredSize = new Dimension (200, 55);
         botonCalendario.setPreferredSize(preferredSize);
-
-        // Modify DatePicker Button to Display "Select a date"
-
              
         DropPhotoListener d = new DropPhotoListener(photo, this);
         DropTarget dropTarget = new DropTarget(photo, d);
