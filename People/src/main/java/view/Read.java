@@ -37,6 +37,10 @@ public class Read extends javax.swing.JDialog {
         return name;
     }
 
+    public JTextField getEmail(){
+        return email;
+    }
+    
     public JDatePicker getDateOfBirth() {
         return dateOfBirth;
     }
@@ -67,6 +71,7 @@ public class Read extends javax.swing.JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        name1 = new javax.swing.JTextField();
         read = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         nif = new javax.swing.JTextField();
@@ -77,6 +82,13 @@ public class Read extends javax.swing.JDialog {
         dateOfBirth = new org.jdatepicker.JDatePicker();
         jLabel2 = new javax.swing.JLabel();
         reset = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
+
+        name1.setEnabled(false);
+        name1.setMaximumSize(new java.awt.Dimension(400, 22));
+        name1.setMinimumSize(new java.awt.Dimension(400, 22));
+        name1.setPreferredSize(new java.awt.Dimension(400, 22));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Read - People v1.1.0");
@@ -90,7 +102,7 @@ public class Read extends javax.swing.JDialog {
         read.setPreferredSize(new java.awt.Dimension(187, 33));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
@@ -152,7 +164,7 @@ public class Read extends javax.swing.JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
-        gridBagConstraints.gridheight = 4;
+        gridBagConstraints.gridheight = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(24, 24, 12, 12);
@@ -191,7 +203,7 @@ public class Read extends javax.swing.JDialog {
         jLabel8.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
@@ -203,7 +215,7 @@ public class Read extends javax.swing.JDialog {
         dateOfBirth.setPreferredSize(new java.awt.Dimension(350, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -215,7 +227,7 @@ public class Read extends javax.swing.JDialog {
         jLabel2.setText("Author: francesc.perez@stucom.com - Version 1.1.0");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
@@ -234,11 +246,34 @@ public class Read extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
         getContentPane().add(reset, gridBagConstraints);
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Email");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
+        getContentPane().add(jLabel4, gridBagConstraints);
+
+        email.setEnabled(false);
+        email.setMaximumSize(new java.awt.Dimension(400, 22));
+        email.setMinimumSize(new java.awt.Dimension(400, 22));
+        email.setPreferredSize(new java.awt.Dimension(400, 22));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
+        getContentPane().add(email, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -256,6 +291,7 @@ public class Read extends javax.swing.JDialog {
         nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
         nif.setForeground(new java.awt.Color(153, 153, 153));
         name.setText("");
+        email.setText("");
         photo.setIcon(null);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
@@ -305,11 +341,14 @@ public class Read extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
+    private javax.swing.JTextField email;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField name;
+    private javax.swing.JTextField name1;
     private javax.swing.JTextField nif;
     private javax.swing.JLabel photo;
     private javax.swing.JButton read;

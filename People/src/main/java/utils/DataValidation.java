@@ -4,6 +4,9 @@
  */
 package utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * @author Francesc Perez 
  * @version 1.1.0
@@ -26,5 +29,11 @@ public class DataValidation {
             "N","J","Z","S","Q","V","H","L","C","K","E"};
         return nifNoLetter + letter[Integer.parseInt(nifNoLetter)%23];
     }
-
+    
+    public static boolean isValidEmail(String email){
+        String emailRegex = "^[a-zA-Z0-9_+&-]+(?:.[a-zA-Z0-9_+&-]+)*@(?:[a-zA-Z0-9-]+.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();   
+    }
 }
