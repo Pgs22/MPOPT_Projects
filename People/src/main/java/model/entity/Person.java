@@ -21,6 +21,7 @@ public class Person implements Serializable{
     private String nif;
     private String name;
     private String email;
+    private String phoneNumber;
     private Date dateOfBirth;
     @Transient
     private ImageIcon photo;
@@ -30,6 +31,32 @@ public class Person implements Serializable{
     public Person(){
         
     }
+    
+    /*
+    
+    Actualmente, el modelo "Persona" carece de un campo de número de teléfono y validación. Para mejorar el modelo, deberíamos:
+
+Añadir un nuevo campo phoneNumber al modelo "Persona".
+Implementar la validación con expresiones regulares para garantizar que el número de teléfono tenga el formato correcto.
+Actualizar la interfaz de usuario para gestionar la entrada y validación del número de teléfono al añadir o actualizar una persona.
+Contexto adicional.
+
+Campo PhoneNumber:
+Añadir un atributo phoneNumber a la clase "Persona" con los métodos getter y setter necesarios.
+
+Validación con expresiones regulares:
+Usar un patrón de expresiones regulares para validar el formato del número de teléfono. Por ejemplo, para un formato de número de teléfono internacional estándar:
+String phoneRegex = "^+?[0-9]{1,4}?[-.\s]?(?\d{1,3})?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"; Cambios en el menú o la app:
+Actualice el formulario o el panel de entrada de la app o el menú para incluir el campo "Número de teléfono".
+
+Al agregar o editar una persona, valide el número de teléfono con la expresión regular. Si el número de teléfono no es válido, muestre un mensaje de error como "Formato de número de teléfono no válido".
+
+Gestión de errores en la app:
+Si el número de teléfono no supera la validación, impida que el usuario guarde o actualice el registro y muestre un mensaje que le solicite que ingrese un número de teléfono válido.
+    
+    */
+    
+    
     
     /**
      * Constructor to validate new person. Two persons cannot have the same NIF
