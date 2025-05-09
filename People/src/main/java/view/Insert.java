@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Component;
+import java.awt.Dimension;
 import static utils.DataValidation.calculateNifLetter;
 import static utils.DataValidation.isLetter;
 import static utils.DataValidation.isNumber;
@@ -19,6 +21,7 @@ import org.jdatepicker.DateModel;
 import org.jdatepicker.JDatePicker;
 import utils.DataValidation;
 
+
 /**
  * Interface used to register a person. It is mandatory to enter at least the 
  * NIF and the name.
@@ -30,6 +33,13 @@ public class Insert extends javax.swing.JDialog {
     public Insert(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        // Modify DatePicker Button to Display "Select a date"
+        JButton botonCalendario = dateOfBirth.getButton();
+        botonCalendario.setText("Select a date");
+        Dimension preferredSize = new Dimension (200, 55);
+        botonCalendario.setPreferredSize(preferredSize);
+             
         DropPhotoListener d = new DropPhotoListener(photo, this);
         DropTarget dropTarget = new DropTarget(photo, d);
         insert.setEnabled(false);
@@ -251,9 +261,15 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 24, 12, 24);
         getContentPane().add(jLabel2, gridBagConstraints);
 
+        dateOfBirth.setToolTipText("");
         dateOfBirth.setMaximumSize(new java.awt.Dimension(350, 22));
         dateOfBirth.setMinimumSize(new java.awt.Dimension(350, 22));
         dateOfBirth.setPreferredSize(new java.awt.Dimension(350, 22));
+        dateOfBirth.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateOfBirthActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -413,6 +429,7 @@ public class Insert extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_nameFocusLost
 
+
     private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
         if(email.getText().isEmpty()){
             email.setText("Enter your email");
@@ -423,14 +440,14 @@ public class Insert extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Invalid email format.", this.getTitle(), JOptionPane.ERROR_MESSAGE);
             }
         }
-    }//GEN-LAST:event_emailFocusLost
+    }
 
     private void emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusGained
         if(email.getText().equals("Enter your email")){
             email.setText("");
             email.setForeground(new java.awt.Color(0, 0, 0));
         }
-    }//GEN-LAST:event_emailFocusGained
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
