@@ -1,5 +1,12 @@
 package view;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -40,7 +47,7 @@ public class ReadAll extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        exportData = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Read All - People v1.1.0");
@@ -87,12 +94,17 @@ public class ReadAll extends javax.swing.JDialog {
         jLabel2.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.insets = new java.awt.Insets(12, 15, 12, 24);
         getContentPane().add(jLabel2, gridBagConstraints);
 
-        jButton1.setText("EXPORT DATA");
+        exportData.setText("EXPORT DATA");
+        exportData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportDataActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -101,14 +113,62 @@ public class ReadAll extends javax.swing.JDialog {
         gridBagConstraints.ipady = 10;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_END;
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 22);
-        getContentPane().add(jButton1, gridBagConstraints);
+        getContentPane().add(exportData, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void exportDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportDataActionPerformed
+        JFileChooser mySport = new JFileChooser(); // Para poder gestionar archivos
+        int returnVal = mySport.showSaveDialog(this); // Para mostrar el guardar como
+        if (returnVal == JFileChooser.APPROVE_OPTION) { // Para saber si ha pulsado guardar o cancelar
+            java.io.File file = mySport.getSelectedFile(); //Método del objeto que le he llamado mySport para obtener referencia del archivo (Que aún no existe)
+            // Para evitar que no guarde sin la extensión del archivo .csv, si no la tiene, se la añadimos
+            if (!file.getName().toLowerCase().endsWith(".csv")) {
+                file = new java.io.File(file.getAbsolutePath() + ".csv");
+            } 
+            
+            // Para obtener la fecha actual
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+            String formattedDate = currentDate.format(formatter);
+
+            // Para añadir al nombre del archivo la fecha actual
+            String baseFilename = file.getAbsolutePath();
+            File fileWithDate = new File(baseFilename + "_" + formattedDate + ".csv");
+          
+            try {
+                FileWriter writer = new FileWriter(file); // Prepara el fichero .csv referenciado anteriormente para escribir
+                for (int i = 0; i < table.getColumnCount(); i++) {
+                    writer.append(table.getColumnName(i));
+                    if (i < table.getColumnCount() - 1) {
+                        writer.append(",");
+                    }
+                }
+                writer.append("\n");
+
+                // Escribe los datos. Convierte los datos a texto y sepera los campos por comas de cada fila
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    for (int j = 0; j < table.getColumnCount(); j++) {
+                        writer.append(table.getValueAt(i, j).toString());
+                        if (j < table.getColumnCount() - 1) {
+                            writer.append(",");
+                        }
+                    }
+                    writer.append("\n"); // Despues de cada fila salimos del segundo for y añadimos un enter para saltar de línea
+                }
+                writer.flush(); // Para escribir en el disco todo lo anterior que está en la memoria temporal (el búfer del FileWriter)
+                writer.close(); // Cerrar y liberar recursos
+                JOptionPane.showMessageDialog(this, "Datos exportados correctamente a " + file.getAbsolutePath(), "Exportación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error al exportar los datos: " + ex.getMessage(), "Error de Exportación", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_exportDataActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton exportData;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable table;
