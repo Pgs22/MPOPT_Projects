@@ -288,7 +288,12 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(jLabel6, gridBagConstraints);
 
+        email.setForeground(new java.awt.Color(153, 153, 153));
+        email.setText("Enter your email");
         email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailFocusGained(evt);
+            }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 emailFocusLost(evt);
             }
@@ -320,7 +325,8 @@ public class Insert extends javax.swing.JDialog {
         nif.setForeground(new java.awt.Color(153, 153, 153));
         name.setText("Enter full name");
         name.setForeground(new java.awt.Color(153, 153, 153));
-        email.setText("");
+        email.setText("Enter your email");
+        email.setForeground(new java.awt.Color(153, 153, 153));
         photo.setIcon(null);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
@@ -408,12 +414,23 @@ public class Insert extends javax.swing.JDialog {
     }//GEN-LAST:event_nameFocusLost
 
     private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
+        if(email.getText().isEmpty()){
+            email.setText("Enter your email");
+            email.setForeground(new java.awt.Color(153, 153, 153));
+        }
         if(!email.getText().isEmpty()){
             if(!DataValidation.isValidEmail(email.getText())){
                 JOptionPane.showMessageDialog(this, "Invalid email format.", this.getTitle(), JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_emailFocusLost
+
+    private void emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusGained
+        if(email.getText().equals("Enter your email")){
+            email.setText("");
+            email.setForeground(new java.awt.Color(0, 0, 0));
+        }
+    }//GEN-LAST:event_emailFocusGained
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdatepicker.JDatePicker dateOfBirth;
