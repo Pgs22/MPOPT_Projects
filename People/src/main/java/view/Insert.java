@@ -410,7 +410,6 @@ public class Insert extends javax.swing.JDialog {
     private void nifFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nifFocusLost
         if(nif.getText().isEmpty()){
             nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
-            nif.setEditable(false);
             nif.setForeground(new java.awt.Color(153, 153, 153));
         }
     }//GEN-LAST:event_nifFocusLost
