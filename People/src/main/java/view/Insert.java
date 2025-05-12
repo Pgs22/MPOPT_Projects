@@ -98,7 +98,7 @@ public class Insert extends javax.swing.JDialog {
         email = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        phoneNumber = new javax.swing.JTextField();
 
         jLabel4.setText("jLabel4");
 
@@ -349,8 +349,16 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(jLabel7, gridBagConstraints);
 
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Enter your phone number");
+        phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
+        phoneNumber.setText("Enter your phone number");
+        phoneNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                phoneNumberFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                phoneNumberFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -358,7 +366,7 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
-        getContentPane().add(jTextField1, gridBagConstraints);
+        getContentPane().add(phoneNumber, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -380,6 +388,8 @@ public class Insert extends javax.swing.JDialog {
         name.setForeground(new java.awt.Color(153, 153, 153));
         email.setText("Enter your email");
         email.setForeground(new java.awt.Color(153, 153, 153));
+        phoneNumber.setText("Enter phone number");
+        phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
         photo.setIcon(null);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
@@ -470,7 +480,27 @@ public class Insert extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_dateOfBirthActionPerformed
 
+    private void phoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFocusGained
+        if(phoneNumber.getText().isEmpty()){
+            phoneNumber.setText("Enter full name");
+            phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_phoneNumberFocusGained
 
+    private void phoneNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFocusLost
+        if(phoneNumber.getText().isEmpty()){
+            phoneNumber.setText("Enter full name");
+            phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
+        }
+        if(!phoneNumber.getText().isEmpty()){
+            if(!DataValidation.isValidPhoneNumber(phoneNumber.getText())){
+                JOptionPane.showMessageDialog(this, "Formato de número de teléfono no válido", this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_phoneNumberFocusLost
+
+//Se activa: Cuando el usuario deja de interactuar con el campo de texto del correo electrónico
+    // y se mueve a otro componente de la interfaz (haciendo clic en otro campo, botón, etc.).
     private void emailFocusLost(java.awt.event.FocusEvent evt) {                                
         if(email.getText().isEmpty()){
             email.setText("Enter your email");
@@ -482,7 +512,8 @@ public class Insert extends javax.swing.JDialog {
             }
         }
     }
-
+// Se activa: Cuando el usuario selecciona o hace clic,
+//  convirtiéndolo en el componente activo que recibe la entrada del teclado.
     private void emailFocusGained(java.awt.event.FocusEvent evt) {                                  
         if(email.getText().equals("Enter your email")){
             email.setText("");
@@ -502,9 +533,9 @@ public class Insert extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField name;
     private javax.swing.JTextField nif;
+    private javax.swing.JTextField phoneNumber;
     private javax.swing.JLabel photo;
     private javax.swing.JButton reset;
     // End of variables declaration//GEN-END:variables

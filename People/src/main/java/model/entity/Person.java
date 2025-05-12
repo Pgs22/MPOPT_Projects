@@ -37,14 +37,14 @@ public class Person implements Serializable{
     Actualmente, el modelo "Persona" carece de un campo de número de teléfono y validación. Para mejorar el modelo, deberíamos:
 
 ok    Añadir un nuevo campo phoneNumber al modelo "Persona".
-Implementar la validación con expresiones regulares para garantizar que el número de teléfono tenga el formato correcto.
+ok   Implementar la validación con expresiones regulares para garantizar que el número de teléfono tenga el formato correcto.
 ok    Actualizar la interfaz de usuario para gestionar la entrada y validación del número de teléfono al añadir o actualizar una persona.
 ok    Contexto adicional.
 
 ok    Campo PhoneNumber:
 ok    Añadir un atributo phoneNumber a la clase "Persona" con los métodos getter y setter necesarios.
 
-Validación con expresiones regulares:
+ok    Validación con expresiones regulares:
 Usar un patrón de expresiones regulares para validar el formato del número de teléfono.
 Por ejemplo, para un formato de número de teléfono internacional estándar:
 String phoneRegex = "^+?[0-9]{1,4}?[-.\s]?(?\d{1,3})?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"; Cambios en el menú o la app:
