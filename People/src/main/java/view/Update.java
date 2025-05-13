@@ -51,6 +51,10 @@ public class Update extends javax.swing.JDialog {
     public JTextField getEmail(){
         return email;
     }
+
+    public JTextField getPhoneNumber() {
+        return phoneNumber;
+    }
     
     public JDatePicker getDateOfBirth() {
         return dateOfBirth;
@@ -370,12 +374,12 @@ public class Update extends javax.swing.JDialog {
         nif.setForeground(new java.awt.Color(153, 153, 153));
         name.setText("");
         email.setText("");
+        phoneNumber.setText("");
         dateOfBirth.getModel().setValue(null);
         photo.setIcon(null); 
         name.setEnabled(false);
         email.setEnabled(false);
-        phoneNumber.setText("Enter phone number");
-        phoneNumber.setForeground(new java.awt.Color(153, 153, 153));        
+        phoneNumber.setEnabled(false);    
         photo.setEnabled(false);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
@@ -480,4 +484,5 @@ public class Update extends javax.swing.JDialog {
     private javax.swing.JButton reset;
     private javax.swing.JButton update;
     // End of variables declaration//GEN-END:variables
+
 }

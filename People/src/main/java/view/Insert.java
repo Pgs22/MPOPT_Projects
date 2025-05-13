@@ -60,6 +60,10 @@ public class Insert extends javax.swing.JDialog {
     public JTextField getEmail() {
         return email;
     }
+
+    public JTextField getPhoneNumber() {
+        return phoneNumber;
+    }
     
     public JDatePicker getDateOfBirth() {
         return dateOfBirth;
@@ -539,4 +543,5 @@ public class Insert extends javax.swing.JDialog {
     private javax.swing.JLabel photo;
     private javax.swing.JButton reset;
     // End of variables declaration//GEN-END:variables
+
 }
