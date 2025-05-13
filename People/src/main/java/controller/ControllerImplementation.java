@@ -101,11 +101,9 @@ public class ControllerImplementation implements IController, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == dSS.getAccept()[0]) {
             handleDataStorageSelection();
-        } 
-        else if(e.getSource() == login.getLogin()){
+        } else if(e.getSource() == login.getLogin()){
             validateLogin();
-        }
-         else if (e.getSource() == menu.getInsert()) {
+        } else if (e.getSource() == menu.getInsert()) {
             handleInsertAction();
         } else if (insert != null && e.getSource() == insert.getInsert()) {
             handleInsertPerson();
@@ -153,10 +151,7 @@ public class ControllerImplementation implements IController, ActionListener {
                 setupJPADatabase();
                 break;
         }
-//        ControllerValidation contValidation = new ControllerValidation();
-//        contValidation;
            handleLogin();
-//        setupMenu();
     }
 
     private void setupFileStorage() {
@@ -238,20 +233,25 @@ public class ControllerImplementation implements IController, ActionListener {
         char[] passwordChars = login.getPasswordField().getPassword();
         String password = new String(passwordChars);
         DAOSQLValidation daoValidation = new DAOSQLValidation();
-        
         try {
             if(daoValidation.validate(name, password)){
                 login.dispose();
                 setupMenu();
             }
             else{
-                JOptionPane.showMessageDialog(login, "User not found. Closing application.", "People v1.1.0", JOptionPane.ERROR_MESSAGE);
-                System.exit(0);
+                JOptionPane.showMessageDialog(login, "Invalid username or password.", "People v1.1.0", JOptionPane.ERROR_MESSAGE);
+                resetLoginForm();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(login, "User not found. Closing application.", "People v1.1.0", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
+    }
+    
+    private void resetLoginForm(){
+        login.getUsername().setText("");
+        login.getPasswordField().setText("");
+        login.setVisible(true);
     }
     
     private void setupMenu() {

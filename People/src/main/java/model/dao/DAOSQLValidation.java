@@ -17,7 +17,6 @@ import start.Routes;
  */
 public class DAOSQLValidation {
     
-    private final String SQL_SELECT_ALL = "SELECT * FROM " + Routes.VALIDATION.getDbServerDB() + "." + Routes.VALIDATION.getDbServerTABLE() + ";";
     private final String SQL_SELECT = "SELECT * FROM " + Routes.VALIDATION.getDbServerDB() + "." + Routes.VALIDATION.getDbServerTABLE() + " WHERE (name = ?) AND (password = ?);";
     
     

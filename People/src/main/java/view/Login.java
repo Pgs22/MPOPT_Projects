@@ -30,6 +30,8 @@ public class Login extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Application logo is not available", "WARNING MESSAGE", JOptionPane.WARNING_MESSAGE);
         }
         username.setEnabled(true);
+        setLocationRelativeTo(null);
+
     }
 
     public JButton getLogin() {
@@ -62,6 +64,8 @@ public class Login extends javax.swing.JDialog {
         passwordField = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(600, 300));
+        setPreferredSize(new java.awt.Dimension(600, 300));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
