@@ -13,13 +13,15 @@ class PersonTest {
     private Person personWithFullData;
     private String nif = "12345678X";
     private String name = "John Doe";
+    private String email = "john@gmail.com";
+    private String phoneNumber = "+34 93 300 30 90";
     private Date dateOfBirth = new Date();
     private ImageIcon photo = new ImageIcon();
 
     @BeforeEach
     void setUp() {
         person = new Person(nif);
-        personWithFullData = new Person(name, nif, dateOfBirth, photo);
+        personWithFullData = new Person(name, nif, dateOfBirth, photo, email, phoneNumber);
     }
 
     @Test
@@ -28,6 +30,8 @@ class PersonTest {
         assertNull(person.getName());
         assertNull(person.getDateOfBirth());
         assertNull(person.getPhoto());
+        assertNull(person.getEmail());
+        assertNull(person.getPhoneNumber());        
     }
 
     @Test
@@ -43,6 +47,8 @@ class PersonTest {
         assertEquals(nif, personWithFullData.getNif());
         assertEquals(dateOfBirth, personWithFullData.getDateOfBirth());
         assertEquals(photo, personWithFullData.getPhoto());
+        assertEquals(email, personWithFullData.getEmail());
+        assertEquals(phoneNumber, personWithFullData.getPhoneNumber());
     }
 
     @Test

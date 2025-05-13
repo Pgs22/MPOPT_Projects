@@ -36,4 +36,11 @@ public class DataValidation {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();   
     }
+    
+    public static boolean isValidPhoneNumber(String phoneNumber){
+        String phoneRegex = "^+?[0-9]{1,4}?[-.\\s]?(?:\\d{1,3})?[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,4}[-.\\s]?\\d{1,9}$";
+        Pattern pattern = Pattern.compile(phoneRegex);
+        Matcher matcher = pattern.matcher(phoneNumber);
+        return matcher.matches();
+    }
 }

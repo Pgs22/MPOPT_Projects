@@ -308,13 +308,17 @@ public class ControllerImplementation implements IController, ActionListener {
             Person pNew = read(p);
             if (pNew != null) {
                 update.getNam().setEnabled(true);
-                update.getEmail().setEnabled(true);
                 update.getDateOfBirth().setEnabled(true);
                 update.getPhoto().setEnabled(true);
+                update.getEmail().setEnabled(true);
+                update.getPhoneNumber().setEnabled(true);
                 update.getUpdate().setEnabled(true);
                 update.getNam().setText(pNew.getName());
                 if(pNew.getEmail() != null){
                     update.getEmail().setText(pNew.getEmail());
+                }
+                if(pNew.getPhoneNumber() != null){
+                    update.getPhoneNumber().setText(pNew.getPhoneNumber());
                 }
                 if (pNew.getDateOfBirth() != null) {
                     Calendar calendar = Calendar.getInstance();
@@ -340,12 +344,15 @@ public class ControllerImplementation implements IController, ActionListener {
             if ((update.getEmail().getText() != null)){
                 p.setEmail(update.getEmail().getText());
             }
+            if ((update.getPhoneNumber().getText() != null)){
+                p.setPhoneNumber(update.getPhoneNumber().getText());
+            }            
             if ((update.getDateOfBirth().getModel().getValue()) != null) {
                 p.setDateOfBirth(((GregorianCalendar) update.getDateOfBirth().getModel().getValue()).getTime());
             }
             if ((ImageIcon) (update.getPhoto().getIcon()) != null) {
                 p.setPhoto((ImageIcon) update.getPhoto().getIcon());
-            }
+            }            
             update(p);
             update.getReset().doClick();
         }
@@ -362,21 +369,27 @@ public class ControllerImplementation implements IController, ActionListener {
                 model.addRow(new Object[i]);
                 model.setValueAt(s.get(i).getNif(), i, 0);
                 model.setValueAt(s.get(i).getName(), i, 1);
-                if (s.get(i).getEmail() != null){
-                    model.setValueAt(s.get(i).getEmail(), i, 2);
-                }
-                else{
+                if (s.get(i).getDateOfBirth() != null) {
+                    model.setValueAt(s.get(i).getDateOfBirth().toString(), i, 2);
+                } else {
                     model.setValueAt("", i, 2);
                 }
-                if (s.get(i).getDateOfBirth() != null) {
-                    model.setValueAt(s.get(i).getDateOfBirth().toString(), i, 3);
-                } else {
-                    model.setValueAt("", i, 3);
-                }
                 if (s.get(i).getPhoto() != null) {
-                    model.setValueAt("yes", i, 4);
+                    model.setValueAt("yes", i, 3);
                 } else {
-                    model.setValueAt("no", i, 4);
+                    model.setValueAt("no", i, 3);
+                }
+                if (s.get(i).getEmail() != null){
+                    model.setValueAt(s.get(i).getEmail(), i, 4);
+                }
+                else{
+                    model.setValueAt("", i, 4);
+                }
+                if (s.get(i).getPhoneNumber() != null){
+                    model.setValueAt(s.get(i).getPhoneNumber(), i, 5);
+                }
+                else{
+                    model.setValueAt("", i, 5);
                 }
             }
             readAll.setVisible(true);
