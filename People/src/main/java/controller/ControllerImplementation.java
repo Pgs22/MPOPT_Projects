@@ -17,6 +17,7 @@ import view.Menu;
 import view.Read;
 import view.ReadAll;
 import view.Update;
+import view.Login;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.dao.DAOSQLValidation;
 import org.jdatepicker.DateModel;
 import static utils.Constants.ARRAY_LIST;
 import static utils.Constants.FILE;
@@ -60,6 +62,7 @@ public class ControllerImplementation implements IController, ActionListener {
     //accessed from the Controller.
     private final DataStorageSelection dSS;
     private IDAO dao;
+    private Login login;
     private Menu menu;
     private Insert insert;
     private Read read;
@@ -98,7 +101,11 @@ public class ControllerImplementation implements IController, ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == dSS.getAccept()[0]) {
             handleDataStorageSelection();
-        } else if (e.getSource() == menu.getInsert()) {
+        } 
+        else if(e.getSource() == login.getLogin()){
+            validateLogin();
+        }
+         else if (e.getSource() == menu.getInsert()) {
             handleInsertAction();
         } else if (insert != null && e.getSource() == insert.getInsert()) {
             handleInsertPerson();
@@ -146,7 +153,10 @@ public class ControllerImplementation implements IController, ActionListener {
                 setupJPADatabase();
                 break;
         }
-        setupMenu();
+//        ControllerValidation contValidation = new ControllerValidation();
+//        contValidation;
+           handleLogin();
+//        setupMenu();
     }
 
     private void setupFileStorage() {
@@ -217,6 +227,33 @@ public class ControllerImplementation implements IController, ActionListener {
         dao = new DAOJPA();
     }
 
+    private void handleLogin() {
+        login = new Login();
+        login.setVisible(true);
+        login.getLogin().addActionListener(this);
+    }
+    
+    private void validateLogin(){
+        String name = login.getUsername().getText();
+        char[] passwordChars = login.getPasswordField().getPassword();
+        String password = new String(passwordChars);
+        DAOSQLValidation daoValidation = new DAOSQLValidation();
+        
+        try {
+            if(daoValidation.validate(name, password)){
+                login.dispose();
+                setupMenu();
+            }
+            else{
+                JOptionPane.showMessageDialog(login, "User not found. Closing application.", "People v1.1.0", JOptionPane.ERROR_MESSAGE);
+                System.exit(0);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(login, "User not found. Closing application.", "People v1.1.0", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
+    }
+    
     private void setupMenu() {
         menu = new Menu();
         menu.setVisible(true);
