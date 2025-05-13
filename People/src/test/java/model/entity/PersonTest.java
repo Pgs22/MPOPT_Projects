@@ -30,6 +30,8 @@ class PersonTest {
         assertNull(person.getName());
         assertNull(person.getDateOfBirth());
         assertNull(person.getPhoto());
+        assertNull(person.getEmail());
+        assertNull(person.getPhoneNumber());        
     }
 
     @Test
@@ -45,6 +47,8 @@ class PersonTest {
         assertEquals(nif, personWithFullData.getNif());
         assertEquals(dateOfBirth, personWithFullData.getDateOfBirth());
         assertEquals(photo, personWithFullData.getPhoto());
+        assertEquals(email, personWithFullData.getEmail());
+        assertEquals(phoneNumber, personWithFullData.getPhoneNumber());
     }
 
     @Test
