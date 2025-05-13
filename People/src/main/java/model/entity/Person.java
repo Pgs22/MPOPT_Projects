@@ -86,21 +86,25 @@ Si el número de teléfono no supera la validación, impida que el usuario guard
      * @param nif
      * @param dateOfBirth
      * @param photo
+     * @param email
+     * @param phoneNumber
      */
-    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo) {
+    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo, String email, String phoneNumber) {
         this.name = name;      
         this.nif = nif;
         this.dateOfBirth = dateOfBirth;
         this.photo = photo;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
-    public Person(String name, String nif, String email, Date dateOfBirth, ImageIcon photo) {
-        this.name = name;      
-        this.nif = nif;
-        this.email = email;
-        this.dateOfBirth = dateOfBirth;
-        this.photo = photo;
-    }
+//    public Person(String name, String nif, String email, Date dateOfBirth, ImageIcon photo) {
+//        this.name = name;      
+//        this.nif = nif;
+//        this.email = email;
+//        this.dateOfBirth = dateOfBirth;
+//        this.photo = photo;
+//    }
     
     //Getters and Setters
     public String getName() {

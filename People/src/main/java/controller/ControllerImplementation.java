@@ -316,6 +316,9 @@ public class ControllerImplementation implements IController, ActionListener {
                 if(pNew.getEmail() != null){
                     update.getEmail().setText(pNew.getEmail());
                 }
+                if(pNew.getPhoneNumber() != null){
+                    update.getPhoneNumber().setText(pNew.getPhoneNumber());
+                }
                 if (pNew.getDateOfBirth() != null) {
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(pNew.getDateOfBirth());
@@ -341,7 +344,7 @@ public class ControllerImplementation implements IController, ActionListener {
                 p.setEmail(update.getEmail().getText());
             }
             if ((update.getPhoneNumber().getText() != null)){
-                p.setEmail(update.getPhoneNumber().getText());
+                p.setPhoneNumber(update.getPhoneNumber().getText());
             }            
             if ((update.getDateOfBirth().getModel().getValue()) != null) {
                 p.setDateOfBirth(((GregorianCalendar) update.getDateOfBirth().getModel().getValue()).getTime());
@@ -368,7 +371,7 @@ public class ControllerImplementation implements IController, ActionListener {
                 if (s.get(i).getDateOfBirth() != null) {
                     model.setValueAt(s.get(i).getDateOfBirth().toString(), i, 2);
                 } else {
-                    model.setValueAt("", i, 3);
+                    model.setValueAt("", i, 2);
                 }
                 if (s.get(i).getPhoto() != null) {
                     model.setValueAt("yes", i, 3);
@@ -382,10 +385,10 @@ public class ControllerImplementation implements IController, ActionListener {
                     model.setValueAt("", i, 4);
                 }
                 if (s.get(i).getPhoneNumber() != null){
-                    model.setValueAt(s.get(i).getPhoneNumber(), i, 4);
+                    model.setValueAt(s.get(i).getPhoneNumber(), i, 5);
                 }
                 else{
-                    model.setValueAt("", i, 4);
+                    model.setValueAt("", i, 5);
                 }
             }
             readAll.setVisible(true);
