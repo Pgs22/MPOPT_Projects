@@ -47,7 +47,8 @@ ok    Añadir un atributo phoneNumber a la clase "Persona" con los métodos gett
 ok    Validación con expresiones regulares:
 Usar un patrón de expresiones regulares para validar el formato del número de teléfono.
 Por ejemplo, para un formato de número de teléfono internacional estándar:
-String phoneRegex = "^+?[0-9]{1,4}?[-.\s]?(?\d{1,3})?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$"; Cambios en el menú o la app:
+String phoneRegex = "^+?[0-9]{1,4}?[-.\s]?(?\d{1,3})?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$";
+    Cambios en el menú o la app:
 Actualice el formulario o el panel de entrada de la app o el menú para incluir el campo "Número de teléfono".
 
 Al agregar o editar una persona, valide el número de teléfono con la expresión regular. Si el número de teléfono no es válido, muestre un mensaje de error como "Formato de número de teléfono no válido".

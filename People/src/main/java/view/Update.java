@@ -92,7 +92,7 @@ public class Update extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        phoneNumber = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update - People v1.1.0");
@@ -318,7 +318,15 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
         getContentPane().add(jLabel6, gridBagConstraints);
 
-        jTextField1.setBackground(new java.awt.Color(242, 242, 242));
+        phoneNumber.setBackground(new java.awt.Color(242, 242, 242));
+        phoneNumber.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                phoneNumberFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                phoneNumberFocusLost(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -326,7 +334,7 @@ public class Update extends javax.swing.JDialog {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
-        getContentPane().add(jTextField1, gridBagConstraints);
+        getContentPane().add(phoneNumber, gridBagConstraints);
 
         pack();
         setLocationRelativeTo(null);
@@ -366,6 +374,8 @@ public class Update extends javax.swing.JDialog {
         photo.setIcon(null); 
         name.setEnabled(false);
         email.setEnabled(false);
+        phoneNumber.setText("Enter phone number");
+        phoneNumber.setForeground(new java.awt.Color(153, 153, 153));        
         photo.setEnabled(false);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
@@ -430,6 +440,25 @@ public class Update extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_emailFocusLost
 
+    private void phoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFocusGained
+        if(phoneNumber.getText().isEmpty()){
+            phoneNumber.setText("Enter full name");
+            phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
+        }
+    }//GEN-LAST:event_phoneNumberFocusGained
+
+    private void phoneNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFocusLost
+        if(phoneNumber.getText().isEmpty()){
+            phoneNumber.setText("Enter full name");
+            phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
+        }
+        if(!phoneNumber.getText().isEmpty()){
+            if(!DataValidation.isValidPhoneNumber(phoneNumber.getText())){
+                JOptionPane.showMessageDialog(this, "Formato de número de teléfono no válido", this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_phoneNumberFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -443,9 +472,9 @@ public class Update extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField name;
     private javax.swing.JTextField nif;
+    private javax.swing.JTextField phoneNumber;
     private javax.swing.JLabel photo;
     private javax.swing.JButton read;
     private javax.swing.JButton reset;
