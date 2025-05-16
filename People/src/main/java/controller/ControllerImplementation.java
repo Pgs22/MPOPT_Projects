@@ -272,7 +272,7 @@ public class ControllerImplementation implements IController, ActionListener {
     }
 
     private void handleInsertPerson() {
-        String name = insert.getNam().getText().equals("Enter full name") ? null : insert.getNif().getText();
+        String name = insert.getNam().getText().equals("Enter full name") ? null : insert.getNam().getText();
         Person p = new Person(name, insert.getNif().getText());
         if(insert.getEmail().getText() != null && !insert.getEmail().getText().equals("Enter your email")){
             p.setEmail((String) insert.getEmail().getText());
