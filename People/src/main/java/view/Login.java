@@ -18,7 +18,7 @@ import javax.swing.JTextField;
  * @author CassiusTedesco
  */
 public class Login extends javax.swing.JDialog {
-
+    
     /**
      * Creates new form Login
      */
