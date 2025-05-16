@@ -40,6 +40,10 @@ public class Read extends javax.swing.JDialog {
     public JTextField getEmail(){
         return email;
     }
+
+    public JTextField getPhoneNumber() {
+        return phoneNumber;
+    }
     
     public JDatePicker getDateOfBirth() {
         return dateOfBirth;

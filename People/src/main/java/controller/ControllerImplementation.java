@@ -192,6 +192,7 @@ public class ControllerImplementation implements IController, ActionListener {
                         + "nif varchar(9) primary key not null, "
                         + "name varchar(50), "
                         + "email varchar(150), "
+                        + "phoneNumber varchar(50), "
                         + "dateOfBirth DATE, "
                         + "photo varchar(200) );");
                 stmt.close();
@@ -239,6 +240,9 @@ public class ControllerImplementation implements IController, ActionListener {
         if(insert.getEmail().getText() != null){
             p.setEmail((String) insert.getEmail().getText());
         }
+        if(insert.getPhoneNumber().getText() != null){
+            p.setPhoneNumber((String) insert.getPhoneNumber().getText());
+        }
         if (insert.getDateOfBirth().getModel().getValue() != null) {
             p.setDateOfBirth(((GregorianCalendar) insert.getDateOfBirth().getModel().getValue()).getTime());
         }
@@ -262,6 +266,9 @@ public class ControllerImplementation implements IController, ActionListener {
             read.getNam().setText(pNew.getName());
             if (pNew.getEmail() != null){
                 read.getEmail().setText(pNew.getEmail());
+            }
+            if (pNew.getPhoneNumber() != null){
+                read.getPhoneNumber().setText(pNew.getPhoneNumber());
             }
             if (pNew.getDateOfBirth() != null) {
                 Calendar calendar = Calendar.getInstance();
