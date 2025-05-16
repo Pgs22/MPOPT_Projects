@@ -22,6 +22,7 @@ public class Person implements Serializable{
     private String name;
     private String email;
     private String phoneNumber;
+    private String postalCode;
     private Date dateOfBirth;
     @Transient
     private ImageIcon photo;
@@ -33,29 +34,25 @@ public class Person implements Serializable{
     }
     
     /*
-    
-    Actualmente, el modelo "Persona" carece de un campo de número de teléfono y validación. Para mejorar el modelo, deberíamos:
+ok Añadir un nuevo campo "postalCode" al modelo "Persona".
+Iok mplementar la validación con expresiones regulares para garantizar que el código postal tenga el formato correcto.
+ok Actualizar la interfaz de usuario para gestionar la entrada y la validación del código postal al añadir o actualizar una persona.
+ok Contexto adicional
 
-ok    Añadir un nuevo campo phoneNumber al modelo "Persona".
-ok   Implementar la validación con expresiones regulares para garantizar que el número de teléfono tenga el formato correcto.
-ok    Actualizar la interfaz de usuario para gestionar la entrada y validación del número de teléfono al añadir o actualizar una persona.
-ok    Contexto adicional.
+ok Campo de código postal:
+ok Añadir un atributo "postalCode" a la clase "Persona" con los métodos getter y setter necesarios.
 
-ok    Campo PhoneNumber:
-ok    Añadir un atributo phoneNumber a la clase "Persona" con los métodos getter y setter necesarios.
+ok Validación con expresiones regulares:
+Usar un patrón de expresiones regulares para validar el formato del código postal. Por ejemplo, para un formato típico de código postal de EE. UU.:
+String postalCodeRegex = "^(\d{5})(?:[-\s]?\d{4})?$";
+Esto gestionará tanto códigos postales de 5 dígitos como formatos extendidos de 9 dígitos (ZIP+4).
 
-ok    Validación con expresiones regulares:
-Usar un patrón de expresiones regulares para validar el formato del número de teléfono.
-Por ejemplo, para un formato de número de teléfono internacional estándar:
-String phoneRegex = "^+?[0-9]{1,4}?[-.\s]?(?\d{1,3})?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$";
-    Cambios en el menú o la app:
-Actualice el formulario o el panel de entrada de la app o el menú para incluir el campo "Número de teléfono".
+ok Cambios en el menú o la app:
+Actualice el formulario o el panel de entrada de la app o el menú para incluir el campo "Código postal".
+Al añadir o editar una persona, valide el código postal con la expresión regular. Si el código postal no es válido, muestre un mensaje de error como "Formato de código postal no válido".
 
-Al agregar o editar una persona, valide el número de teléfono con la expresión regular. Si el número de teléfono no es válido, muestre un mensaje de error como "Formato de número de teléfono no válido".
-
-Gestión de errores en la app:
-Si el número de teléfono no supera la validación, impida que el usuario guarde o actualice el registro y muestre un mensaje que le solicite que ingrese un número de teléfono válido.
-    
+ok Gestión de errores en la app:
+Si el código postal no supera la validación, impida que el usuario guarde o actualice el registro y muestre un mensaje solicitándole que introduzca un código postal válido.   
     */
     
     
@@ -88,14 +85,16 @@ Si el número de teléfono no supera la validación, impida que el usuario guard
      * @param photo
      * @param email
      * @param phoneNumber
+     * @param postalCode
      */
-    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo, String email, String phoneNumber) {
+    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo, String email, String phoneNumber, String postalCode) {
         this.name = name;      
         this.nif = nif;
         this.dateOfBirth = dateOfBirth;
         this.photo = photo;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.postalCode = postalCode;
     }
 
 //    public Person(String name, String nif, String email, Date dateOfBirth, ImageIcon photo) {
@@ -123,6 +122,22 @@ Si el número de teléfono no supera la validación, impida que el usuario guard
         this.email = email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }    
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }      
+    
     public String getNif() {
         return nif;
     }
@@ -153,22 +168,7 @@ Si el número de teléfono no supera la validación, impida que el usuario guard
 
     public void setPhotoOnlyJPA(byte[] photoOnlyJPA) {
         this.photoOnlyJPA = photoOnlyJPA;
-    }
-
-    /**
-     * @return the phoneNumber
-     */
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    /**
-     * @param phoneNumber the phoneNumber to set
-     */
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }    
-    
+    }  
     
     /**
      * Function used to compare two Personas. There cannot be two or more people
@@ -212,6 +212,9 @@ Si el número de teléfono no supera la validación, impida que el usuario guard
     @Override
     public String toString() {
         return "Person {" + "Name = " + name + ", NIF = " + nif
+                + ", Email = " + email
+                + ", Phone numer = " + phoneNumber
+                + ", Postal code = " + postalCode
                 + ", DateOfBirth = " + dateOfBirth + ", Photo = " + (photo!=null) + "}";
     }
 
