@@ -43,4 +43,11 @@ public class DataValidation {
         Matcher matcher = pattern.matcher(phoneNumber);
         return matcher.matches();
     }
+    
+    public static boolean isValidPostalCode(String postalCode){
+        String postalCodeRegex = "^(\\d{5})(?:[-\\s]?\\d{4})?$";
+        Pattern pattern = Pattern.compile(postalCodeRegex);
+        Matcher matcher = pattern.matcher(postalCode);
+        return matcher.matches();
+    }
 }

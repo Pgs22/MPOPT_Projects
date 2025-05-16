@@ -197,6 +197,8 @@ public class ControllerImplementation implements IController, ActionListener {
                         + "nif varchar(9) primary key not null, "
                         + "name varchar(50), "
                         + "email varchar(150), "
+                        + "phoneNumer varchar(50), "
+                        + "postalCode varchar(9), "
                         + "dateOfBirth DATE, "
                         + "photo varchar(200) );");
                 stmt.close();
@@ -277,6 +279,12 @@ public class ControllerImplementation implements IController, ActionListener {
         if(insert.getEmail().getText() != null && !insert.getEmail().getText().equals("Enter your email")){
             p.setEmail((String) insert.getEmail().getText());
         }
+        if(insert.getPhoneNumber().getText() != null && !insert.getPhoneNumber().getText().equals("Enter your phone number")){
+            p.setPhoneNumber((String) insert.getPhoneNumber().getText());
+        }
+        if(insert.getPostalCode().getText() != null && !insert.getPostalCode().getText().equals("Enter your postal code")){
+            p.setPostalCode((String) insert.getPostalCode().getText());
+        }
         if (insert.getDateOfBirth().getModel().getValue() != null) {
             p.setDateOfBirth(((GregorianCalendar) insert.getDateOfBirth().getModel().getValue()).getTime());
         }
@@ -300,6 +308,12 @@ public class ControllerImplementation implements IController, ActionListener {
             read.getNam().setText(pNew.getName());
             if (pNew.getEmail() != null){
                 read.getEmail().setText(pNew.getEmail());
+            }
+            if (pNew.getPhoneNumber() != null){
+                read.getPhoneNumber().setText(pNew.getPhoneNumber());
+            }
+            if (pNew.getPostalCode() != null){
+                read.getPostalCode().setText(pNew.getPostalCode());
             }
             if (pNew.getDateOfBirth() != null) {
                 Calendar calendar = Calendar.getInstance();
@@ -349,6 +363,7 @@ public class ControllerImplementation implements IController, ActionListener {
                 update.getPhoto().setEnabled(true);
                 update.getEmail().setEnabled(true);
                 update.getPhoneNumber().setEnabled(true);
+                update.getPostalCode().setEnabled(true);
                 update.getUpdate().setEnabled(true);
                 update.getNam().setText(pNew.getName());
                 if(pNew.getEmail() != null){
@@ -383,7 +398,10 @@ public class ControllerImplementation implements IController, ActionListener {
             }
             if ((update.getPhoneNumber().getText() != null)){
                 p.setPhoneNumber(update.getPhoneNumber().getText());
-            }            
+            }
+            if ((update.getPostalCode().getText() != null)){
+                p.setPostalCode(update.getPostalCode().getText());
+            }                 
             if ((update.getDateOfBirth().getModel().getValue()) != null) {
                 p.setDateOfBirth(((GregorianCalendar) update.getDateOfBirth().getModel().getValue()).getTime());
             }
@@ -427,6 +445,12 @@ public class ControllerImplementation implements IController, ActionListener {
                 }
                 else{
                     model.setValueAt("", i, 5);
+                }
+                if (s.get(i).getPostalCode() != null){
+                    model.setValueAt(s.get(i).getPostalCode(), i, 6);
+                }
+                else{
+                    model.setValueAt("", i, 6);
                 }
             }
             readAll.setVisible(true);
