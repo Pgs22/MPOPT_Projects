@@ -38,6 +38,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.dao.DAOSQLValidation;
+import model.entity.User;
 import org.jdatepicker.DateModel;
 import static utils.Constants.ARRAY_LIST;
 import static utils.Constants.FILE;
@@ -236,9 +237,15 @@ public class ControllerImplementation implements IController, ActionListener {
         String password = new String(passwordChars);
         DAOSQLValidation daoValidation = new DAOSQLValidation();
         try {
-            if(daoValidation.validate(name, password)){
-                login.dispose();
-                setupMenu();
+            User user = daoValidation.validate(name, password);
+            login.dispose();
+            if(user != null){
+                if(user.getRol().equals("admin")){
+                    setupAdminMenu();
+                }
+                else{
+                    setupEmployeeMenu();
+                }
             }
             else{
                 JOptionPane.showMessageDialog(login, "Invalid username or password.", "People v1.1.0", JOptionPane.ERROR_MESSAGE);
@@ -255,8 +262,9 @@ public class ControllerImplementation implements IController, ActionListener {
         login.getPasswordField().setText("");
         login.setVisible(true);
     }
+
     
-    private void setupMenu() {
+    private void setupAdminMenu() {
         menu = new Menu();
         menu.setVisible(true);
         menu.getInsert().addActionListener(this);
@@ -265,6 +273,22 @@ public class ControllerImplementation implements IController, ActionListener {
         menu.getDelete().addActionListener(this);
         menu.getReadAll().addActionListener(this);
         menu.getDeleteAll().addActionListener(this);
+    }
+    
+    private void setupEmployeeMenu() {
+        menu = new Menu();
+        menu.setVisible(true);
+        menu.getInsert().addActionListener(this);
+        menu.getRead().addActionListener(this);
+        menu.getUpdate().addActionListener(this);
+        menu.getDelete().addActionListener(this);
+        menu.getReadAll().addActionListener(this);
+        menu.getDeleteAll().addActionListener(this);
+        
+        menu.getInsert().setEnabled(false);
+        menu.getUpdate().setEnabled(false);
+        menu.getDelete().setEnabled(false);
+        menu.getDeleteAll().setEnabled(false);
     }
 
     private void handleInsertAction() {

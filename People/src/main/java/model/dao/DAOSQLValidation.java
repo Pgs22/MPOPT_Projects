@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.entity.User;
 import start.Routes;
 
 /**
@@ -30,7 +31,7 @@ public class DAOSQLValidation {
         conn.close();
     }
     
-    public boolean validate(String name, String password) throws SQLException{
+    public User validate(String name, String password) throws SQLException{
         Connection conn;
         PreparedStatement instruction;
         ResultSet rs;
@@ -40,11 +41,11 @@ public class DAOSQLValidation {
         instruction.setString(2, password);
         rs = instruction.executeQuery();
         while (rs.next()) {
-            return true;
+            return new User(name, password, rs.getString("rol"));
         }
         rs.close();
         instruction.close();
         disconnect(conn);
-        return false;
+        return null;
     }
 }
