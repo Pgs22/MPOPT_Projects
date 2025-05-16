@@ -485,15 +485,15 @@ public class Insert extends javax.swing.JDialog {
     }//GEN-LAST:event_dateOfBirthActionPerformed
 
     private void phoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFocusGained
-        if(phoneNumber.getText().isEmpty()){
-            phoneNumber.setText("Enter full name");
+        if(phoneNumber.getText().equals("Enter your phone number")){
+            phoneNumber.setText("");
             phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
         }
     }//GEN-LAST:event_phoneNumberFocusGained
 
     private void phoneNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFocusLost
         if(phoneNumber.getText().isEmpty()){
-            phoneNumber.setText("Enter full name");
+            phoneNumber.setText("Enter your phone number");
             phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
         }
         if(!phoneNumber.getText().isEmpty()){
