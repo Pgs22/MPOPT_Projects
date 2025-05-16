@@ -521,15 +521,15 @@ public class Insert extends javax.swing.JDialog {
     }//GEN-LAST:event_dateOfBirthActionPerformed
 
     private void phoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFocusGained
-        if(phoneNumber.getText().isEmpty()){
-            phoneNumber.setText("Enter phone number");
+        if(phoneNumber.getText().equals("Enter your phone number")){
+            phoneNumber.setText("");
             phoneNumber.setForeground(new java.awt.Color(0, 0, 0));
         }
     }//GEN-LAST:event_phoneNumberFocusGained
 
     private void phoneNumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFocusLost
         if(phoneNumber.getText().isEmpty()){
-            phoneNumber.setText("Enter phone number");
+            phoneNumber.setText("Enter your phone number");
             phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
         }
         if(!phoneNumber.getText().isEmpty()){
@@ -541,7 +541,7 @@ public class Insert extends javax.swing.JDialog {
 
     private void postalCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_postalCodeFocusLost
         if(postalCode.getText().isEmpty()){
-            postalCode.setText("Enter postal code");
+            postalCode.setText("Enter your postal code");
             postalCode.setForeground(new java.awt.Color(153, 153, 153));
         }
         if(!postalCode.getText().isEmpty()){
@@ -552,8 +552,8 @@ public class Insert extends javax.swing.JDialog {
     }//GEN-LAST:event_postalCodeFocusLost
 
     private void postalCodeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_postalCodeFocusGained
-        if(postalCode.getText().isEmpty()){
-            postalCode.setText("Enter postal code");
+        if(postalCode.getText().equals("Enter your postal code")){
+            postalCode.setText("");
             postalCode.setForeground(new java.awt.Color(0, 0, 0));
         }
     }//GEN-LAST:event_postalCodeFocusGained
