@@ -46,6 +46,7 @@ import static utils.Constants.FILE_SERIALIZATION;
 import static utils.Constants.HASH_MAP;
 import static utils.Constants.JPA_DATABASE;
 import static utils.Constants.SQL_DATABASE;
+import view.Count;
 
 
 
@@ -70,6 +71,7 @@ public class ControllerImplementation implements IController, ActionListener {
     private Delete delete;
     private Update update;
     private ReadAll readAll;
+    private Count count;
     public static User user;
 
     /**
@@ -127,6 +129,9 @@ public class ControllerImplementation implements IController, ActionListener {
             handleReadAll();
         } else if (e.getSource() == menu.getDeleteAll()) {
             handleDeleteAll();
+        
+        } else if (e.getSource() == menu.getCount()) {
+            handleCount();
         }
     }
 
@@ -274,6 +279,7 @@ public class ControllerImplementation implements IController, ActionListener {
         menu.getDelete().addActionListener(this);
         menu.getReadAll().addActionListener(this);
         menu.getDeleteAll().addActionListener(this);
+        menu.getCount().addActionListener(this);
     }
     
     private void setupEmployeeMenu() {
@@ -285,6 +291,7 @@ public class ControllerImplementation implements IController, ActionListener {
         menu.getDelete().addActionListener(this);
         menu.getReadAll().addActionListener(this);
         menu.getDeleteAll().addActionListener(this);
+        menu.getCount().addActionListener(this);
         
         menu.getInsert().setEnabled(false);
         menu.getUpdate().setEnabled(false);
@@ -504,6 +511,14 @@ public class ControllerImplementation implements IController, ActionListener {
         }
     }
     
+     private void handleCount() {
+          ArrayList<Person> s = readAll();
+          int personas = s.size();          
+          count = new Count(menu, true);
+          count.getContador().setText(String.valueOf(personas));
+          count.setVisible(true);
+    }
+    
     /**
      * This function inserts the Person object with the requested NIF, if it
      * doesn't exist. If there is any access problem with the storage device,
@@ -666,5 +681,7 @@ public void delete(Person p) {
             }
         }
     }
+
+   
 
 }
