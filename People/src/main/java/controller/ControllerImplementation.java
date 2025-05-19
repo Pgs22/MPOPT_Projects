@@ -23,19 +23,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.persistence.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.dao.DAOSQLValidation;
 import model.entity.User;
@@ -453,7 +458,8 @@ public class ControllerImplementation implements IController, ActionListener {
         if (s.isEmpty()) {
             JOptionPane.showMessageDialog(menu, "There are not people registered yet.", "Read All - People v1.1.0", JOptionPane.WARNING_MESSAGE);
         } else {
-            readAll = new ReadAll(menu, true);
+            //readAll = new ReadAll(menu, true);
+            readAll = new ReadAll(menu, true, this);
             DefaultTableModel model = (DefaultTableModel) readAll.getTable().getModel();
             for (int i = 0; i < s.size(); i++) {
                 model.addRow(new Object[i]);
@@ -491,6 +497,67 @@ public class ControllerImplementation implements IController, ActionListener {
             readAll.setVisible(true);
         }
     }
+    
+    public void handleExportData() {
+        JFileChooser mySport = new JFileChooser(); // Para poder gestionar archivos
+        int returnVal = mySport.showSaveDialog(readAll); // Usamos 'readAll' como padre
+        if (returnVal == JFileChooser.APPROVE_OPTION) { // Para saber si ha pulsado guardar o cancelar
+            File file = mySport.getSelectedFile(); //Método del objeto que le he llamado mySport para obtener referencia del archivo (Que aún no existe)
+            // Para evitar que no guarde sin la extensión del archivo .csv, si no la tiene, se la añadimos
+            if (!file.getName().toLowerCase().endsWith(".csv")) {
+                file = new File(file.getAbsolutePath() + ".csv");
+            }
+
+            // Para obtener la fecha actual
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+            String formattedDate = currentDate.format(formatter);
+
+            // Para añadir al nombre del archivo la fecha actual
+            String baseFilename = file.getAbsolutePath();
+            File fileWithDate = new File(baseFilename + "_" + formattedDate + ".csv");
+
+            try {
+                FileWriter writer = new FileWriter(fileWithDate); // Usamos el fichero con la fecha
+                JTable table = readAll.getTable(); // Obtenemos la tabla de 'readAll'
+                if (table != null) {
+                    // Escribe los encabezados de las columnas
+                    for (int i = 0; i < table.getColumnCount(); i++) {
+                        writer.append(table.getColumnName(i));
+                        if (i < table.getColumnCount() - 1) {
+                            writer.append(",");
+                        }
+                    }
+                    writer.append("\n");
+
+                    // Escribe los datos de la tabla
+                    DefaultTableModel model = (DefaultTableModel) table.getModel();
+                    for (int i = 0; i < model.getRowCount(); i++) {
+                        for (int j = 0; j < model.getColumnCount(); j++) {
+                            Object value = model.getValueAt(i, j);
+                            writer.append(value != null ? value.toString() : "");
+                            if (j < table.getColumnCount() - 1) {
+                                writer.append(",");
+                            }
+                        }
+                        writer.append("\n"); // Después de cada fila, salto de línea
+                    }
+                    writer.flush(); // Escribe en el disco
+                    writer.close();
+                    JOptionPane.showMessageDialog(readAll, "Datos exportados correctamente a " + fileWithDate.getAbsolutePath(), "Exportación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(readAll, "No hay tabla para exportar.", "Error de Exportación", JOptionPane.ERROR_MESSAGE);
+                    if (writer != null) {
+                        writer.close(); // Cierre si hay error
+                    }
+                }
+
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(readAll, "Error al exportar los datos: " + ex.getMessage(), "Error de Exportación", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
 
     public void handleDeleteAll() {
         Object[] options = {"Yes", "No"};
