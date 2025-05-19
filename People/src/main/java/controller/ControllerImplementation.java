@@ -70,6 +70,7 @@ public class ControllerImplementation implements IController, ActionListener {
     private Delete delete;
     private Update update;
     private ReadAll readAll;
+    public static User user;
 
     /**
      * This constructor allows the controller to know which data storage option
@@ -237,7 +238,7 @@ public class ControllerImplementation implements IController, ActionListener {
         String password = new String(passwordChars);
         DAOSQLValidation daoValidation = new DAOSQLValidation();
         try {
-            User user = daoValidation.validate(name, password);
+            this.user = daoValidation.validate(name, password);
             login.dispose();
             if(user != null){
                 if(user.getRol().equals("admin")){
