@@ -64,6 +64,10 @@ public class Insert extends javax.swing.JDialog {
     public JTextField getPhoneNumber() {
         return phoneNumber;
     }
+
+    public JTextField getPostalCode() {
+        return postalCode;
+    }
     
     public JDatePicker getDateOfBirth() {
         return dateOfBirth;
@@ -103,6 +107,8 @@ public class Insert extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         phoneNumber = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        postalCode = new javax.swing.JTextField();
 
         jLabel4.setText("jLabel4");
 
@@ -118,7 +124,7 @@ public class Insert extends javax.swing.JDialog {
         insert.setPreferredSize(new java.awt.Dimension(187, 33));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 0.2;
@@ -168,7 +174,7 @@ public class Insert extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHEAST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
@@ -250,7 +256,7 @@ public class Insert extends javax.swing.JDialog {
         jLabel8.setPreferredSize(new java.awt.Dimension(150, 22));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
@@ -262,7 +268,7 @@ public class Insert extends javax.swing.JDialog {
         jLabel2.setRequestFocusEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -280,7 +286,7 @@ public class Insert extends javax.swing.JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
@@ -372,6 +378,35 @@ public class Insert extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
         getContentPane().add(phoneNumber, gridBagConstraints);
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("Postal code");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 12);
+        getContentPane().add(jLabel9, gridBagConstraints);
+
+        postalCode.setForeground(new java.awt.Color(153, 153, 153));
+        postalCode.setText("Enter your postal code");
+        postalCode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                postalCodeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                postalCodeFocusLost(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(12, 12, 12, 24);
+        getContentPane().add(postalCode, gridBagConstraints);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -394,6 +429,8 @@ public class Insert extends javax.swing.JDialog {
         email.setForeground(new java.awt.Color(153, 153, 153));
         phoneNumber.setText("Enter phone number");
         phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
+        postalCode.setText("Enter phone number");
+        postalCode.setForeground(new java.awt.Color(153, 153, 153));
         photo.setIcon(null);
         //We reset the calendar date to the current date ...
         LocalDate dateLocate = LocalDate.now();
@@ -461,7 +498,6 @@ public class Insert extends javax.swing.JDialog {
     private void nifFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nifFocusLost
         if(nif.getText().isEmpty()){
             nif.setText("Enter NIF number, letter is calculated (e.g., 12345678)");
-            nif.setEditable(false);
             nif.setForeground(new java.awt.Color(153, 153, 153));
         }
     }//GEN-LAST:event_nifFocusLost
@@ -487,7 +523,7 @@ public class Insert extends javax.swing.JDialog {
     private void phoneNumberFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phoneNumberFocusGained
         if(phoneNumber.getText().equals("Enter your phone number")){
             phoneNumber.setText("");
-            phoneNumber.setForeground(new java.awt.Color(153, 153, 153));
+            phoneNumber.setForeground(new java.awt.Color(0, 0, 0));
         }
     }//GEN-LAST:event_phoneNumberFocusGained
 
@@ -502,6 +538,25 @@ public class Insert extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_phoneNumberFocusLost
+
+    private void postalCodeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_postalCodeFocusLost
+        if(postalCode.getText().isEmpty()){
+            postalCode.setText("Enter your postal code");
+            postalCode.setForeground(new java.awt.Color(153, 153, 153));
+        }
+        if(!postalCode.getText().isEmpty()){
+            if(!DataValidation.isValidPostalCode(postalCode.getText())){
+                JOptionPane.showMessageDialog(this, "Formato de código postal no válido", this.getTitle(), JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_postalCodeFocusLost
+
+    private void postalCodeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_postalCodeFocusGained
+        if(postalCode.getText().equals("Enter your postal code")){
+            postalCode.setText("");
+            postalCode.setForeground(new java.awt.Color(0, 0, 0));
+        }
+    }//GEN-LAST:event_postalCodeFocusGained
 
 //Se activa: Cuando el usuario deja de interactuar con el campo de texto del correo electrónico
     // y se mueve a otro componente de la interfaz (haciendo clic en otro campo, botón, etc.).
@@ -537,10 +592,12 @@ public class Insert extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField name;
     private javax.swing.JTextField nif;
     private javax.swing.JTextField phoneNumber;
     private javax.swing.JLabel photo;
+    private javax.swing.JTextField postalCode;
     private javax.swing.JButton reset;
     // End of variables declaration//GEN-END:variables
 

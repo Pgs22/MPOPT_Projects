@@ -22,6 +22,7 @@ public class Person implements Serializable{
     private String name;
     private String email;
     private String phoneNumber;
+    private String postalCode;
     private Date dateOfBirth;
     @Transient
     private ImageIcon photo;
@@ -32,7 +33,29 @@ public class Person implements Serializable{
         
     }
     
-   
+    /*
+ok Añadir un nuevo campo "postalCode" al modelo "Persona".
+Iok mplementar la validación con expresiones regulares para garantizar que el código postal tenga el formato correcto.
+ok Actualizar la interfaz de usuario para gestionar la entrada y la validación del código postal al añadir o actualizar una persona.
+ok Contexto adicional
+
+ok Campo de código postal:
+ok Añadir un atributo "postalCode" a la clase "Persona" con los métodos getter y setter necesarios.
+
+ok Validación con expresiones regulares:
+Usar un patrón de expresiones regulares para validar el formato del código postal. Por ejemplo, para un formato típico de código postal de EE. UU.:
+String postalCodeRegex = "^(\d{5})(?:[-\s]?\d{4})?$";
+Esto gestionará tanto códigos postales de 5 dígitos como formatos extendidos de 9 dígitos (ZIP+4).
+
+ok Cambios en el menú o la app:
+Actualice el formulario o el panel de entrada de la app o el menú para incluir el campo "Código postal".
+Al añadir o editar una persona, valide el código postal con la expresión regular. Si el código postal no es válido, muestre un mensaje de error como "Formato de código postal no válido".
+
+ok Gestión de errores en la app:
+Si el código postal no supera la validación, impida que el usuario guarde o actualice el registro y muestre un mensaje solicitándole que introduzca un código postal válido.   
+    */
+    
+    
     
     /**
      * Constructor to validate new person. Two persons cannot have the same NIF
@@ -62,14 +85,16 @@ public class Person implements Serializable{
      * @param photo
      * @param email
      * @param phoneNumber
+     * @param postalCode
      */
-    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo, String email, String phoneNumber) {
+    public Person(String name, String nif, Date dateOfBirth, ImageIcon photo, String email, String phoneNumber, String postalCode) {
         this.name = name;      
         this.nif = nif;
         this.dateOfBirth = dateOfBirth;
         this.photo = photo;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.postalCode = postalCode;
     }
 
 //    public Person(String name, String nif, String email, Date dateOfBirth, ImageIcon photo) {
@@ -97,6 +122,22 @@ public class Person implements Serializable{
         this.email = email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }    
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }      
+    
     public String getNif() {
         return nif;
     }
@@ -127,22 +168,7 @@ public class Person implements Serializable{
 
     public void setPhotoOnlyJPA(byte[] photoOnlyJPA) {
         this.photoOnlyJPA = photoOnlyJPA;
-    }
-
-    /**
-     * @return the phoneNumber
-     */
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    /**
-     * @param phoneNumber the phoneNumber to set
-     */
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }    
-    
+    }  
     
     /**
      * Function used to compare two Personas. There cannot be two or more people
@@ -186,8 +212,9 @@ public class Person implements Serializable{
     @Override
     public String toString() {
         return "Person {" + "Name = " + name + ", NIF = " + nif
-                + ", DateOfBirth = " + email
-                + ", DateOfBirth = " + phoneNumber
+                + ", Email = " + email
+                + ", Phone numer = " + phoneNumber
+                + ", Postal code = " + postalCode
                 + ", DateOfBirth = " + dateOfBirth + ", Photo = " + (photo!=null) + "}";
     }
 
