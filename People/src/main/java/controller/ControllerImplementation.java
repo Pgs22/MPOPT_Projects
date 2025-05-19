@@ -397,6 +397,9 @@ public class ControllerImplementation implements IController, ActionListener {
                 if(pNew.getPhoneNumber() != null){
                     update.getPhoneNumber().setText(pNew.getPhoneNumber());
                 }
+                if(pNew.getPostalCode() != null){
+                    update.getPostalCode().setText(pNew.getPostalCode());
+                }                
                 if (pNew.getDateOfBirth() != null) {
                     Calendar calendar = Calendar.getInstance();
                     calendar.setTime(pNew.getDateOfBirth());
