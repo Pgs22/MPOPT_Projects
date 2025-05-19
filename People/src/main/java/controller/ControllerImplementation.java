@@ -23,18 +23,22 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import javax.persistence.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.dao.DAOSQLValidation;
@@ -482,6 +486,54 @@ public class ControllerImplementation implements IController, ActionListener {
                 }
             }
             readAll.setVisible(true);
+        }
+    }
+    
+    public void handleReadAllExport() {
+                JFileChooser mySport = new JFileChooser(); // Para poder gestionar archivos
+        int returnVal = mySport.showSaveDialog(this); // Para mostrar el guardar como
+        if (returnVal == JFileChooser.APPROVE_OPTION) { // Para saber si ha pulsado guardar o cancelar
+            java.io.File file = mySport.getSelectedFile(); //Método del objeto que le he llamado mySport para obtener referencia del archivo (Que aún no existe)
+            // Para evitar que no guarde sin la extensión del archivo .csv, si no la tiene, se la añadimos
+            if (!file.getName().toLowerCase().endsWith(".csv")) {
+                file = new java.io.File(file.getAbsolutePath() + ".csv");
+            } 
+            
+            // Para obtener la fecha actual
+            LocalDate currentDate = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+            String formattedDate = currentDate.format(formatter);
+
+            // Para añadir al nombre del archivo la fecha actual
+            String baseFilename = file.getAbsolutePath();
+            File fileWithDate = new File(baseFilename + "_" + formattedDate + ".csv");
+          
+            try {
+                FileWriter writer = new FileWriter(file); // Prepara el fichero .csv referenciado anteriormente para escribir
+                for (int i = 0; i < table.getColumnCount(); i++) {
+                    writer.append(table.getColumnName(i));
+                    if (i < table.getColumnCount() - 1) {
+                        writer.append(",");
+                    }
+                }
+                writer.append("\n");
+
+                // Escribe los datos. Convierte los datos a texto y sepera los campos por comas de cada fila
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    for (int j = 0; j < table.getColumnCount(); j++) {
+                        writer.append(table.getValueAt(i, j).toString());
+                        if (j < table.getColumnCount() - 1) {
+                            writer.append(",");
+                        }
+                    }
+                    writer.append("\n"); // Despues de cada fila salimos del segundo for y añadimos un enter para saltar de línea
+                }
+                writer.flush(); // Para escribir en el disco todo lo anterior que está en la memoria temporal (el búfer del FileWriter)
+                writer.close(); // Cerrar y liberar recursos
+                JOptionPane.showMessageDialog(this, "Datos exportados correctamente a " + file.getAbsolutePath(), "Exportación Exitosa", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(this, "Error al exportar los datos: " + ex.getMessage(), "Error de Exportación", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 
