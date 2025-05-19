@@ -9,6 +9,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
+import controller.ControllerImplementation;
+      
 
 /**
  * Interface used to read all persons.
@@ -17,8 +19,11 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class ReadAll extends javax.swing.JDialog {
 
-    public ReadAll(java.awt.Frame parent, boolean modal) {
+    private controller.ControllerImplementation controller;
+    
+    public ReadAll(java.awt.Frame parent, boolean modal, controller.ControllerImplementation controller) {
         super(parent, modal);
+        this.controller = controller;
         initComponents();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment((int)JTable.CENTER_ALIGNMENT);
@@ -122,7 +127,7 @@ public class ReadAll extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exportDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportDataActionPerformed
-        handleReadAllExport();
+        controller.handleExportData();
 //        JFileChooser mySport = new JFileChooser(); // Para poder gestionar archivos
 //        int returnVal = mySport.showSaveDialog(this); // Para mostrar el guardar como
 //        if (returnVal == JFileChooser.APPROVE_OPTION) { // Para saber si ha pulsado guardar o cancelar
