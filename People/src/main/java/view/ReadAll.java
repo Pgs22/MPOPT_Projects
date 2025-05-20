@@ -1,15 +1,8 @@
 package view;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
-import controller.ControllerImplementation;
+import javax.swing.JButton;
       
 
 /**
@@ -17,13 +10,9 @@ import controller.ControllerImplementation;
  * @author Francesc Perez
  * @version 1.1.0
  */
-public class ReadAll extends javax.swing.JDialog {
-
-    private ControllerImplementation controller; // Encapsulo variable controller
-    
+public class ReadAll extends javax.swing.JDialog {    
     public ReadAll(java.awt.Frame parent, boolean modal, controller.ControllerImplementation controller) {
         super(parent, modal);
-        this.controller = controller;
         initComponents();
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment((int)JTable.CENTER_ALIGNMENT);
@@ -39,6 +28,10 @@ public class ReadAll extends javax.swing.JDialog {
 
     public JTable getTable() {
         return table;
+    }
+
+    public JButton getExportData() {
+        return exportData;
     }
 
     
@@ -127,7 +120,7 @@ public class ReadAll extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void exportDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportDataActionPerformed
-        controller.handleExportData();
+
     }//GEN-LAST:event_exportDataActionPerformed
 
 
