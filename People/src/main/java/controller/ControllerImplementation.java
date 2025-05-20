@@ -132,6 +132,8 @@ public class ControllerImplementation implements IController, ActionListener {
             handleUpdatePerson();
         } else if (e.getSource() == menu.getReadAll()) {
             handleReadAll();
+        } else if (e.getSource() == readAll.getExportData()) {
+            handleExportData();
         } else if (e.getSource() == menu.getDeleteAll()) {
             handleDeleteAll();
         
@@ -460,6 +462,7 @@ public class ControllerImplementation implements IController, ActionListener {
         } else {
             //readAll = new ReadAll(menu, true);
             readAll = new ReadAll(menu, true, this);
+            readAll.getExportData().addActionListener(this);
             DefaultTableModel model = (DefaultTableModel) readAll.getTable().getModel();
             for (int i = 0; i < s.size(); i++) {
                 model.addRow(new Object[i]);
@@ -500,7 +503,7 @@ public class ControllerImplementation implements IController, ActionListener {
     
     public void handleExportData() {
         JFileChooser mySport = new JFileChooser(); // Para poder gestionar archivos
-        int returnVal = mySport.showSaveDialog(readAll); // Usamos 'readAll' como padre
+        int returnVal = mySport.showSaveDialog(readAll.getExportData()); // Usamos 'readAll' como padre
         if (returnVal == JFileChooser.APPROVE_OPTION) { // Para saber si ha pulsado guardar o cancelar
             File file = mySport.getSelectedFile(); //Método del objeto que le he llamado mySport para obtener referencia del archivo (Que aún no existe)
             // Para evitar que no guarde sin la extensión del archivo .csv, si no la tiene, se la añadimos
